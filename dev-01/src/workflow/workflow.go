@@ -40,6 +40,10 @@ type Workflow struct {
 	//logs
 }
 
+// avalia
+// rag -> talvez seja bom estar dentro do agente em especifico, um metodo de RAG para aquele agente
+// rodar agente
+// retornar
 func (w *Workflow) Run(input Input) (Output, error) {
 	taskKind, err := w.Classificator.Evaluate(input)
 	if err != nil {

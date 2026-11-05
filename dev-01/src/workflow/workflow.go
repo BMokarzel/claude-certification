@@ -3,7 +3,8 @@ package workflow
 import (
 	"fmt"
 
-	"../entity/agent"
+	"github.com/BMokarzel/claude-certification.git/dev-01/src/entity/agent"
+	"github.com/BMokarzel/claude-certification.git/dev-01/src/entity/rag"
 )
 
 type Input struct{}
@@ -35,6 +36,7 @@ type PromptInterface interface {
 type Workflow struct {
 	Classificator Classificator
 	AgentsMap     map[TaskType]agent.AgentInterface
+	RAGKB         rag.RAG
 	//logs
 }
 
@@ -47,6 +49,7 @@ func (w *Workflow) Run(input Input) (Output, error) {
 	if !ok {
 		return Output{}, nil
 	}
+	w.RAGKB.Run()
 	res, err := ag.Run(agent.AgentInput{})
 	if err != nil {
 		return Output{}, nil
